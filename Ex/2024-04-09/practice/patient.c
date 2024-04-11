@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <ctype.h>
 typedef struct Queue
 {
     int data;
@@ -72,12 +73,13 @@ bool Queue_visit(Queue **head, Queue **tail)
 {
     Queue *p = (Queue *)malloc(sizeof(Queue));
     p = (*head)->next;
+    printf("Now queue:");
     while (p != NULL)
     {
         printf("%d ", p->data);
         p = p->next;
     }
-    printf("\n");
+    printf("<-\n");
     return true;
 }
 
@@ -90,14 +92,12 @@ int main()
     printf("Enter code:");
     while ((c = getchar()) != 'q')
     {
-
         if (c == 'i')
         {
             printf("Insert number:");
-            scanf("%d ", &num);
-            fflush(stdin);
+            scanf("%d", &num);
             Queue_in(&head, &tail, num);
-            // printf("\nEnter code:");
+            Queue_visit(&head, &tail);
         }
         else if (c == 'e')
         {
@@ -107,25 +107,23 @@ int main()
             }
             else
             {
-                printf("Empty Queue!\n");
+                printf("Now Empty Queue!\n");
             }
-
-            // printf("\nEnter code:");
         }
         else if (c == 'd')
         {
             Queue_destory(&head, &tail);
-            // printf("\nEnter code:");
         }
         else if (c == 'v')
         {
             Queue_visit(&head, &tail);
-            // printf("\nEnter code:");
         }
         else
         {
-            // printf("Invalid code\n");
-            // printf("\nEnter code:");
+            printf("Invalid Code!\n");
         }
+
+        getchar();
+        printf("\nEnter code:");
     }
 }

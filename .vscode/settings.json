@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "basic_controls.h": "c",
+        "version_manage.h": "c",
+        "i_o_process.h": "c",
+        "linkedlist.h": "c",
+        "stack.h": "c",
+        "termio.h": "c"
     }
 }
