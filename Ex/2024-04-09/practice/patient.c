@@ -11,22 +11,21 @@ bool Queue_out(Queue **head, Queue **tail, int *data);
 bool Queue_destory(Queue **head, Queue **tail);
 bool Queue_in(Queue **head, Queue **tail, int data)
 {
-    if ((*head) == NULL)
+    if (!(*head))
     {
         (*head) = (Queue *)malloc(sizeof(Queue));
+        (*tail) = (Queue *)malloc(sizeof(Queue));
         (*head)->next = (Queue *)malloc(sizeof(Queue));
+
         (*head)->next->data = data;
-        (*head)->next->next = NULL;
-        *tail = (*head)->next;
-        return true;
+        (*tail)->next = (*head)->next;
     }
     else
     {
-        Queue *p = (Queue *)malloc(sizeof(Queue));
-        p->data = data;
-        p->next = (*head)->next;
-        (*head)->next = p;
-        return true;
+        (*tail)->next->next = (Queue *)malloc(sizeof(Queue));
+        (*tail)->next = (*tail)->next->next;
+        (*tail)->next->data = data;
+        (*tail)->next->next = NULL;
     }
 }
 
@@ -34,20 +33,14 @@ bool Queue_out(Queue **head, Queue **tail, int *data)
 {
     if ((*head)->next == NULL)
     {
-        // Empty Queue
         return false;
     }
     else
     {
-        *data = (*tail)->data;
+        *data = (*head)->next->data;
         Queue *p = (*head)->next;
-        while (p->next != *tail)
-        {
-            p = p->next;
-        }
-        free(*tail);
-        p->next = NULL;
-        *tail = p;
+        (*head)->next = p->next;
+        free(p);
         return true;
     }
 }
@@ -108,8 +101,15 @@ int main()
         }
         else if (c == 'e')
         {
-            Queue_out(&head, &tail, &num);
-            printf("Exit number:%d\n", num);
+            if (Queue_out(&head, &tail, &num))
+            {
+                printf("Exit number:%d\n", num);
+            }
+            else
+            {
+                printf("Empty Queue!\n");
+            }
+
             // printf("\nEnter code:");
         }
         else if (c == 'd')
