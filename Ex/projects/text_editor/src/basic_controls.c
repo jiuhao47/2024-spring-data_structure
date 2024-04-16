@@ -4,11 +4,10 @@
 #include "i_o_process.h"
 #include "basic_controls.h"
 #include "version_manage.h"
+#include "piece_table.h"
 int state = STATE_COMMAND;
-void state_control()
+bool state_control(int input)
 {
-    int input;
-    input = scanKeyboard();
     if (state == STATE_COMMAND)
     {
         printf("\b");
@@ -18,10 +17,13 @@ void state_control()
         state = STATE_COMMAND;
         printf("\b\b");
         printf("Now Command mode\n");
+        return true;
     }
     else if (input == 105 && state != STATE_INSERT)
     {
         state = STATE_INSERT;
         printf("Now Insert mode\n");
+        return true;
     }
+    return false;
 }
