@@ -1,42 +1,32 @@
 #include "basic_head.h"
+#include "stack.h"
 #include "linkedlist.h"
 #include "i_o_process.h"
 #include "basic_controls.h"
 #include "version_manage.h"
 #include "piece_table.h"
 int state = STATE_COMMAND;
-bool state_control(int argc, char *argv[], piece **head, int input, int *cursor, int *text_len)
+bool state_control(int argc, char *argv[], Stack **undo_head, Stack **redo_head, piece **head, int input, int *cursor, int *text_len)
 {
+    ElementType top = NULL;
+    Stack_top(undo_head, &top);
     if (state == STATE_COMMAND)
     {
-        if (input == 10)
-        {
-            printf("\033[F");
-        }
-        else if (input != 119)
-            printf("\b \b");
+        // system("clear");
+        printf("-- COMMAND --\n");
+        printf("\b");
         if (input == 44)
         {
-            system("clear");
-            printf(TITLE);
-            printf(COMMAND);
-
             *cursor = (*cursor >= 1) ? *cursor - 1 : 0;
             // right
             // keyboard : .
-            pieces_show(head, *cursor, text_len);
             return true;
         }
         else if (input == 46)
         {
-            system("clear");
-            printf(TITLE);
-            printf(COMMAND);
-
             *cursor = (*cursor < *text_len) ? *cursor + 1 : *text_len;
             // left
             // keyboard : ,
-            pieces_show(head, *cursor, text_len);
             return true;
         }
         else if (input == 119)
@@ -46,19 +36,9 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
                 if (file_save(argc, argv, head, *text_len))
                     printf("Save successfully\n");
             }
-            else
-            {
-                system("clear");
-                printf(TITLE);
-                printf(COMMAND);
-                pieces_show(head, *cursor, text_len);
-            }
         }
         else if (input == 127)
         {
-            system("clear");
-            printf(TITLE);
-            printf(COMMAND);
             // delete
             int tempplace = 0;
             piece *f = *head;
@@ -73,6 +53,8 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
                 }
                 else if (tempplace > *cursor)
                 {
+                    printf("Middle delete\n");
+                    // Bug?
                     piece *front = NULL;
                     piece *back = NULL;
                     piece_create(&front, f->text, f->start, f->length - (tempplace - *cursor) - 1);
@@ -93,28 +75,118 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
                 pre_f = f;
                 f = f->next;
             }
+
             *cursor = (*cursor >= 1) ? *cursor - 1 : 0;
             *text_len = (*text_len >= 1) ? *text_len - 1 : 0;
-            pieces_show(head, *cursor, text_len);
+            // Bug may be?
+            Stack_top(undo_head, &top);
+            printf("op=%d\n", top->op);
+            if (top->op == 1 || top->op == 0)
+            {
+                ElementType undoUnit = (ElementType)malloc(sizeof(UndoRedoUnit));
+                printf("Delete 2 Enter\n");
+                undoUnit->op = 2;
+                undoUnit->pre_node = pre_f;
+                undoUnit->node = f;
+                f->next = NULL;
+                Stack_push(undo_head, undoUnit);
+            }
+            else if (top->op == 2 || top->op == 4)
+            {
+                if (top->pre_node == pre_f)
+                {
+                    ;
+                }
+                else
+                {
+                    ElementType undoUnit = (ElementType)malloc(sizeof(UndoRedoUnit));
+                    if (top->op == 4)
+                    {
+                        top->op = 3;
+                    }
+                    printf("Delete 4 Enter\n");
+                    undoUnit->op = 4;
+                    undoUnit->pre_node = pre_f;
+                    undoUnit->node = f;
+                    f->next = top->node;
+                    top->node->next = NULL;
+                    // f2<-f3<-f3
+                    Stack_push(undo_head, undoUnit);
+                }
+            }
+            // printf("undoUnit.op=%d\n", undoUnit->op);
             return true;
+        }
+        else if (input == 122)
+        {
+            // undo
+            ElementType pop_consist = NULL;
+            if (scanKeyboard() == 10)
+            {
+                Stack_pop(undo_head, &top);
+                printf("top.op=%d", top->op);
+                if ((top->op) == 0)
+                {
+                    piece *temp = top->pre_node->next;
+                    top->pre_node->next = top->pre_node->next->next;
+                    top->node = temp;
+                    *cursor = 0;
+                }
+                else if (top->op == 1)
+                {
+                    piece *temp = top->pre_node->next;
+                    top->node->next = top->pre_node->next->next->next->next;
+                    top->pre_node->next = top->node;
+                    top->node = temp;
+                    *cursor = 0;
+                }
+                else if (top->op == 2)
+                {
+                    piece *temp = top->pre_node->next;
+                    top->node->next = top->pre_node->next->next->next;
+                    top->pre_node->next = top->node;
+                    top->node = temp;
+                    temp->next->next = NULL;
+                }
+                else if (top->op == 4)
+                {
+                    ElementType temp1 = top;
+                    piece *temp2 = top->pre_node->next;
+                    do
+                    {
+                        Stack_pop(undo_head, &pop_consist);
+                        Stack_push(redo_head, pop_consist);
+                    } while (pop_consist->op == 3);
+                    pop_consist->node->next = top->pre_node->next->next->next;
+                    top->pre_node->next = top->node;
+                    top->node = temp2;
+                    temp2->next->next = NULL;
+                }
+
+                Stack_push(redo_head, top);
+                printf("Stack_undo!\n");
+            }
+        }
+        else if (input == 121)
+        {
+            if (scanKeyboard() == 10)
+            {
+            }
         }
     }
     if (input == 27 && state != STATE_COMMAND)
     {
-        system("clear");
+        // system("clear");
         state = STATE_COMMAND;
         printf("\b\b");
-        printf(TITLE);
-        printf(COMMAND);
+        printf("-- COMMAND --\n");
         return true;
     }
     else if (input == 105 && state != STATE_INSERT)
     {
-        system("clear");
+        // system("clear");
         state = STATE_INSERT;
-        printf(TITLE);
-        printf(INSERT);
-        pieces_show(head, *cursor, text_len);
+        printf("-- INSERT --\n");
         return true;
     }
     return false;
@@ -154,9 +226,12 @@ bool file_input(int argc, char *argv[], char **origin)
             fclose(file);
             exit(-1);
         }
+
+        // get file content
         fread(buffer, 1, filesize, file);
         buffer[filesize] = '\0';
         *origin = buffer;
+        // printf("文件内容：\n%s\n", buffer);
         fclose(file);
         return true;
     }
@@ -198,3 +273,21 @@ bool file_save(int argc, char *argv[], piece **head, int text_len)
     fclose(file);
     return true;
 }
+
+void swap(int *x, int *y)
+{
+    *x = *y + *x;
+    *y = *x - *y;
+    *x = *x - *y;
+}
+
+void my_numpy()
+{
+    return;
+}
+/*
+bool piece_undo_record(Stack **Stack_head, piece **head, int *cursor, int input, int *text_len)
+{
+
+}
+*/

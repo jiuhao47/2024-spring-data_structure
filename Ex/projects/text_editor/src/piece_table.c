@@ -1,11 +1,10 @@
 #include "basic_head.h"
-#include "stack.h"
 #include "linkedlist.h"
 #include "i_o_process.h"
 #include "basic_controls.h"
 #include "version_manage.h"
 #include "piece_table.h"
-bool piece_create(piece **node, char *text, int start, int length)
+bool piece_create(piece **node, char **text, int start, int length)
 {
     if (!(*node))
     {
@@ -25,16 +24,15 @@ bool piece_create(piece **node, char *text, int start, int length)
     }
 }
 
-bool piece_list_init(piece **head, char *origin)
+bool piece_list_init(piece **head, char **origin)
 {
-    return piece_create(head, origin, 0, strlen(origin));
+    return piece_create(head, origin, 0, strlen(*origin));
 }
 
-bool piece_insert(piece **head, char *add, int insert_len, int start, int insert_place)
+bool piece_insert(piece **head, char **origin, char **add, int insert_len, int start, int insert_place)
 {
-    // strappend(add,text);
-    // abandoned
-    piece *temp;
+    int temp_start = insert_place;
+    piece *temp = NULL;
     if (!piece_create(&temp, add, start, insert_len))
     {
         return false;
@@ -42,15 +40,14 @@ bool piece_insert(piece **head, char *add, int insert_len, int start, int insert
     int temp_place = 0;
     int gap = 0;
     piece *f = (piece *)malloc(sizeof(piece));
+    piece *pre_f = NULL;
     f->length = f->start = 0;
     f->text = NULL;
-    f = *head;
-    // piece *f = *head;
-    //?Only head
-    //?ahead none!~?
-    while (f)
+    f->next = *head;
+    pre_f = f->next;
+    while (f->next)
     {
-        temp_place = temp_place + f->length;
+        temp_place = temp_place + f->next->length;
         if (temp_place > insert_place)
         {
             break;
@@ -62,38 +59,79 @@ bool piece_insert(piece **head, char *add, int insert_len, int start, int insert
         }
         else
         {
-            f = f->next;
+            pre_f = f->next;
+            f->next = f->next->next;
         }
     }
     if (gap)
     {
-        temp->next = f->next;
-        f->next = temp;
-        return true;
+        temp->next = f->next->next;
+        f->next->next = temp;
     }
     else
     {
-        piece *front;
-        piece *back;
-        piece_create(&front, add, f->next->start, f->next->length - (temp_place - insert_place));
-        piece_create(&back, add, f->next->start + front->length, (temp_place - insert_place));
-        piece *p_free = f->next;
+        piece *front = NULL;
+        piece *back = NULL;
+        piece_create(&front, f->next->text, f->next->start, f->next->length - (temp_place - insert_place));
+        piece_create(&back, f->next->text, f->next->start + f->next->length - (temp_place - insert_place), (temp_place - insert_place));
         front->next = temp;
         temp->next = back;
         back->next = f->next->next;
-        f->next = front;
-        // f->front->temp->back->f->next->next;
-        free(p_free);
-        return true;
+        if (f->next == *head)
+        {
+            *head = front;
+            pre_f = *head;
+        }
+        else
+        {
+            pre_f->next = front;
+        }
     }
+    return true;
 }
 
-bool pieces_show(piece **head)
+bool pieces_show(piece **head, int cursor, int *text_len)
 {
-    piece *p = head;
+
+    piece *p = *head;
+    int place = 0;
+    int count = 0;
     while (p)
     {
+        if ((cursor == 0) & (cursor == place) & (count == 0))
+        {
+            printf("\033[7m \033[m");
+        }
+        for (int i = 0; i < (*p).length; i++)
+        {
 
+            printf("%c", (*((*p).text))[(*p).start + i]);
+            ++place;
+            if (cursor == place)
+            {
+                printf("\033[7m \033[m");
+            }
+        }
+        ++count;
         p = p->next;
+    }
+    printf("\nEditor:");
+    *text_len = place;
+    return true;
+}
+
+bool place_find(piece **head, int cursor, int *place)
+{
+    int tempplace = 0;
+    piece *f = *head;
+    while (f)
+    {
+        tempplace = tempplace + f->length;
+        if (tempplace >= cursor)
+        {
+            *place = tempplace - cursor + 1;
+            break;
+        }
+        f = f->next;
     }
 }

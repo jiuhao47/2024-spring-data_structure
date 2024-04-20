@@ -5,12 +5,6 @@
 #include "basic_controls.h"
 #include "version_manage.h"
 #include "piece_table.h"
-typedef char ElementType;
-typedef struct Stack
-{
-    ElementType data;
-    struct Stack *next;
-} Stack;
 
 bool Stack_init(Stack **head)
 {
@@ -70,6 +64,29 @@ bool Stack_pop(Stack **head, ElementType *data)
             free(q);
             return true;
             // Pop successfully;
+        }
+    }
+}
+
+bool Stack_top(Stack **head, ElementType *data)
+{
+    if (!(*head))
+    {
+        return false;
+        // Stack do not exist;
+    }
+    else
+    {
+        if (!((*head)->next))
+        {
+            return false;
+            // Stack empty;
+        }
+        else
+        {
+            *data = (*head)->next->data;
+            return true;
+            // top visit successfully;
         }
     }
 }

@@ -1,30 +1,50 @@
 #include "basic_head.h"
-#include "stack.h"
+#include "piece_table.h"
 #include "linkedlist.h"
 #include "i_o_process.h"
 #include "basic_controls.h"
 #include "version_manage.h"
-#include "piece_table.h"
+
 void addbuf_append(char c, char **addbuf);
-int main()
+
+int main(int argc, char *argv[])
 {
 
-    char *origin = "Hello World!\n";
+    system("clear");
+    char *origin = NULL;
+    if (!file_input(argc, argv, &origin))
+    {
+        origin = "";
+    }
     char *addbuf = (char *)malloc(sizeof(char) * STR_LEN);
+    piece *head = NULL;
     int start = 0;
     int now = 0;
-    piece *head = NULL;
-    piece_list_init(&head, origin);
     int cursor = strlen(origin);
+    int text_len = strlen(origin);
+    piece_list_init(&head, &origin);
+    printf(TITLE);
+    printf(COMMAND);
+    pieces_show(&head, cursor, &text_len);
     while (state)
     {
-        int input;
+        int input = 0;
         input = scanKeyboard();
-        if (state_control(input))
+        // printf("%d", input);
+        if (state_control(argc, argv, &head, input, &cursor, &text_len))
         {
             // Insert!
-            // printf("State Changed!\n");
-            piece_insert(&head, addbuf, now - start, start, cursor);
+
+            if (input == 27)
+            {
+                if (now - start)
+                {
+                    piece_insert(&head, &origin, &addbuf, now - start, start, cursor);
+                }
+                cursor = cursor + now - start;
+                start = now;
+                pieces_show(&head, cursor, &text_len);
+            }
         }
         else
         {
@@ -33,7 +53,6 @@ int main()
                 addbuf_append(input, &addbuf);
                 ++now;
             }
-            // printf("Just input!\n");
         }
     }
     free(addbuf);
@@ -60,10 +79,4 @@ void addbuf_append(char c, char **addbuf)
         (*addbuf)[i_add] = c;
     }
     i_add++;
-    printf("\n");
-    for (int i = 0; i < length; i++)
-    {
-        printf(" %d", (*addbuf)[i]);
-    }
-    printf("\n");
 }

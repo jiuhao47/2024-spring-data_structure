@@ -1,5 +1,5 @@
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o: \
- /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c \
+CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls_copy.c.o: \
+ /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls_copy.c \
  /usr/include/stdc-predef.h \
  /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/basic_head.h \
  /usr/include/stdio.h \
@@ -72,6 +72,7 @@ CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/p
  /usr/include/x86_64-linux-gnu/asm/ioctl.h \
  /usr/include/asm-generic/ioctl.h \
  /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
+ /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/stack.h \
  /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/linkedlist.h \
  /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/i_o_process.h \
  /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/basic_controls.h \

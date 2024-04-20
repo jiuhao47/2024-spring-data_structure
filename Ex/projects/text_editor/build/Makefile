@@ -249,30 +249,6 @@ home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/pie
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.s
 .PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.s
 
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.o: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.o
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.o
-
-# target to build an object file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.o
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.o
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.i: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.i
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.i
-
-# target to preprocess a source file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.i
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.i
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.s: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.s
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.s
-
-# target to generate assembly for a file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.s
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.c.s
-
 home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.o: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o
 .PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.o
 
@@ -321,9 +297,6 @@ help:
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.o"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.i"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.s"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.o"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.i"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/stack.s"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.o"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.i"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.s"

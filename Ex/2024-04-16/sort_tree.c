@@ -80,7 +80,7 @@ bool Treeinit(Treenode **root, EleType val)
         return true;
     }
 }
-
+/*
 bool Treenode_insert(Treenode **root, Treenode *newnode)
 {
     if ((*root))
@@ -100,6 +100,7 @@ bool Treenode_insert(Treenode **root, Treenode *newnode)
     }
     return true;
 }
+*/
 /*
 bool Tree_print(Treenode **root, int mode)
 {
@@ -204,7 +205,7 @@ bool Tree_print(Treenode **root, int mode)
         while (head_2->next)
         {
             Stack_pop(&head_2, &p);
-            printf("%d ", p->val);
+            printf("%c ", p->val);
         }
         break;
     default:
@@ -225,13 +226,22 @@ int main()
 {
     Treenode *root = NULL;
     int i = 0;
-    Treeinit(&root, 5);
+    Treeinit(&root, 97);
+    root->left = Treenode_build(98);
+    root->right = Treenode_build(99);
+    root->left->left = Treenode_build(100);
+    root->left->right = Treenode_build(101);
+    root->right->left = Treenode_build(102);
+    root->right->right = Treenode_build(103);
+
+    /*
     while (i < 10)
     {
         Treenode *p = Treenode_build(i);
         Treenode_insert(&root, p);
         ++i;
     }
+    */
     int mode;
     printf("Input the mode of print:");
     scanf("%d", &mode);

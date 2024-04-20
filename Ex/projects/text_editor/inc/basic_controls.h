@@ -1,5 +1,6 @@
 #ifndef _BASIC_CONTROLS_H
 #define _BASIC_CONTROLS_H
 extern int state;
-bool state_control(int input);
+bool file_input(int argc, char *argv[], char **origin);
+
 #endif
