@@ -83,38 +83,10 @@ CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/p
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c.s
 
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o: CMakeFiles/text_editor.dir/flags.make
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o: /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o: CMakeFiles/text_editor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o -MF CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o.d -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o -c /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c
-
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c > CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.i
-
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.s
-
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o: CMakeFiles/text_editor.dir/flags.make
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o: /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o: CMakeFiles/text_editor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o -MF CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o.d -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o -c /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c
-
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c > CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.i
-
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.s
-
 CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o: CMakeFiles/text_editor.dir/flags.make
 CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o: /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c
 CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o: CMakeFiles/text_editor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o -MF CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o.d -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o -c /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c
 
 CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.i: cmake_force
@@ -128,7 +100,7 @@ CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/p
 CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o: CMakeFiles/text_editor.dir/flags.make
 CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o: /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c
 CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o: CMakeFiles/text_editor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o -MF CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o.d -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o -c /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c
 
 CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.i: cmake_force
@@ -139,41 +111,21 @@ CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/p
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.s
 
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o: CMakeFiles/text_editor.dir/flags.make
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o: /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o: CMakeFiles/text_editor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o -MF CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o.d -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o -c /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c
-
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c > CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.i
-
-CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c -o CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.s
-
 # Object files for target text_editor
 text_editor_OBJECTS = \
 "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c.o" \
-"CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o" \
-"CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o" \
 "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o" \
-"CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o" \
-"CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o"
+"CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o"
 
 # External object files for target text_editor
 text_editor_EXTERNAL_OBJECTS =
 
 text_editor: CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c.o
-text_editor: CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o
-text_editor: CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o
 text_editor: CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o
 text_editor: CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o
-text_editor: CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o
 text_editor: CMakeFiles/text_editor.dir/build.make
 text_editor: CMakeFiles/text_editor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable text_editor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable text_editor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/text_editor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

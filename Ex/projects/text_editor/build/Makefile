@@ -153,54 +153,6 @@ home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/bas
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c.s
 .PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c.s
 
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.o: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.o
-
-# target to build an object file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.i: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.i
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.i
-
-# target to preprocess a source file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.i
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.i
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.s: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.s
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.s
-
-# target to generate assembly for a file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.s
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.s
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.o: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.o
-
-# target to build an object file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.i: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.i
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.i
-
-# target to preprocess a source file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.i
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.i
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.s: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.s
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.s
-
-# target to generate assembly for a file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.s
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.s
-
 home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.o: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o
 .PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.o
 
@@ -249,30 +201,6 @@ home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/pie
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.s
 .PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.s
 
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.o: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.o
-
-# target to build an object file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.i: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.i
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.i
-
-# target to preprocess a source file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.i
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.i
-
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.s: home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.s
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.s
-
-# target to generate assembly for a file
-home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_editor.dir/build.make CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.s
-.PHONY : home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -285,21 +213,12 @@ help:
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.o"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.i"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.s"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.o"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.i"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.s"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.o"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.i"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.s"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.o"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.i"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.s"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.o"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.i"
 	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.s"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.o"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.i"
-	@echo "... home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.s"
 .PHONY : help
 
 

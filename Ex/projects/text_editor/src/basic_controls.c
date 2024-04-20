@@ -1,11 +1,25 @@
 #include "basic_head.h"
-#include "linkedlist.h"
-#include "i_o_process.h"
 #include "basic_controls.h"
-#include "version_manage.h"
-#include "piece_table.h"
 int state = STATE_COMMAND;
-bool state_control(int argc, char *argv[], piece **head, int input, int *cursor, int *text_len)
+int scanKeyboard()
+{
+    int in;
+    struct termios new_settings;
+    struct termios stored_settings;
+    tcgetattr(0, &stored_settings);
+    new_settings = stored_settings;
+    new_settings.c_lflag &= (~ICANON);
+    new_settings.c_cc[VTIME] = 0;
+    tcgetattr(0, &stored_settings);
+    new_settings.c_cc[VMIN] = 1;
+    tcsetattr(0, TCSANOW, &new_settings);
+
+    in = getchar();
+
+    tcsetattr(0, TCSANOW, &stored_settings);
+    return in;
+}
+bool state_control(int argc, char *argv[], int input, State *global_state)
 {
     if (state == STATE_COMMAND)
     {
@@ -21,10 +35,10 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
             printf(TITLE);
             printf(COMMAND);
 
-            *cursor = (*cursor >= 1) ? *cursor - 1 : 0;
+            global_state->cursor = (global_state->cursor >= 1) ? global_state->cursor - 1 : 0;
             // right
             // keyboard : .
-            pieces_show(head, *cursor, text_len);
+            pieces_show(global_state);
             return true;
         }
         else if (input == 46)
@@ -33,17 +47,17 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
             printf(TITLE);
             printf(COMMAND);
 
-            *cursor = (*cursor < *text_len) ? *cursor + 1 : *text_len;
+            global_state->cursor = (global_state->cursor < global_state->text_len) ? global_state->cursor + 1 : global_state->text_len;
             // left
             // keyboard : ,
-            pieces_show(head, *cursor, text_len);
+            pieces_show(global_state);
             return true;
         }
         else if (input == 119)
         {
             if (scanKeyboard() == 10)
             {
-                if (file_save(argc, argv, head, *text_len))
+                if (file_save(argc, argv, global_state))
                     printf("Save successfully\n");
             }
             else
@@ -51,7 +65,7 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
                 system("clear");
                 printf(TITLE);
                 printf(COMMAND);
-                pieces_show(head, *cursor, text_len);
+                pieces_show(global_state);
             }
         }
         else if (input == 127)
@@ -61,28 +75,28 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
             printf(COMMAND);
             // delete
             int tempplace = 0;
-            piece *f = *head;
+            piece *f = global_state->head;
             piece *pre_f = f;
             while (f)
             {
                 tempplace = tempplace + f->length;
-                if (tempplace == *cursor)
+                if (tempplace == global_state->cursor)
                 {
                     f->length = (f->length >= 1) ? f->length - 1 : 0;
                     break;
                 }
-                else if (tempplace > *cursor)
+                else if (tempplace > global_state->cursor)
                 {
                     piece *front = NULL;
                     piece *back = NULL;
-                    piece_create(&front, f->text, f->start, f->length - (tempplace - *cursor) - 1);
-                    piece_create(&back, f->text, f->start + f->length - (tempplace - *cursor), (tempplace - *cursor));
+                    piece_create(&front, f->text, f->start, f->length - (tempplace - global_state->cursor) - 1);
+                    piece_create(&back, f->text, f->start + f->length - (tempplace - global_state->cursor), (tempplace - global_state->cursor));
                     front->next = back;
                     back->next = f->next;
-                    if (f == *head)
+                    if (f == global_state->head)
                     {
-                        *head = front;
-                        pre_f = *head;
+                        global_state->head = front;
+                        pre_f = global_state->head;
                     }
                     else
                     {
@@ -93,10 +107,14 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
                 pre_f = f;
                 f = f->next;
             }
-            *cursor = (*cursor >= 1) ? *cursor - 1 : 0;
-            *text_len = (*text_len >= 1) ? *text_len - 1 : 0;
-            pieces_show(head, *cursor, text_len);
+            global_state->cursor = (global_state->cursor >= 1) ? global_state->cursor - 1 : 0;
+            global_state->text_len = (global_state->text_len >= 1) ? global_state->text_len - 1 : 0;
+            pieces_show(global_state);
             return true;
+        }
+        else if (input == 113)
+        {
+            exit(0);
         }
     }
     if (input == 27 && state != STATE_COMMAND)
@@ -114,13 +132,13 @@ bool state_control(int argc, char *argv[], piece **head, int input, int *cursor,
         state = STATE_INSERT;
         printf(TITLE);
         printf(INSERT);
-        pieces_show(head, *cursor, text_len);
+        pieces_show(global_state);
         return true;
     }
     return false;
 }
 
-bool file_input(int argc, char *argv[], char **origin)
+bool file_input(int argc, char *argv[], State *global_state)
 {
     if (argc < 2)
     {
@@ -156,16 +174,16 @@ bool file_input(int argc, char *argv[], char **origin)
         }
         fread(buffer, 1, filesize, file);
         buffer[filesize] = '\0';
-        *origin = buffer;
+        global_state->origin = buffer;
         fclose(file);
         return true;
     }
 }
 
-bool file_save(int argc, char *argv[], piece **head, int text_len)
+bool file_save(int argc, char *argv[], State *global_state)
 {
-    char *text = (char *)malloc(sizeof(text_len + 1));
-    piece *p = *head;
+    char *text = (char *)malloc(sizeof(global_state->text_len + 1));
+    piece *p = global_state->head;
     int place = 0;
     while (p)
     {
@@ -176,7 +194,7 @@ bool file_save(int argc, char *argv[], piece **head, int text_len)
         }
         p = p->next;
     }
-    text[text_len] = '\0';
+    text[global_state->text_len] = '\0';
     FILE *file = NULL;
     if (argc == 2)
     {

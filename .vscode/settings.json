@@ -9,6 +9,7 @@
         "termio.h": "c",
         "stdbool.h": "c",
         "piece_table.h": "c",
-        "basic_head.h": "c"
+        "basic_head.h": "c",
+        "stdio.h": "c"
     }
 }

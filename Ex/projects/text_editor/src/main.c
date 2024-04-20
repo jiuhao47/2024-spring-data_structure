@@ -1,37 +1,31 @@
 #include "basic_head.h"
-#include "piece_table.h"
-#include "linkedlist.h"
-#include "i_o_process.h"
-#include "basic_controls.h"
-#include "version_manage.h"
 
-void addbuf_append(char c, char **addbuf);
+#include "basic_controls.h"
 
 int main(int argc, char *argv[])
 {
-
+    State Global_State;
     system("clear");
-    char *origin = NULL;
-    if (!file_input(argc, argv, &origin))
+    Global_State.origin = NULL;
+    if (!file_input(argc, argv, &Global_State))
     {
-        origin = "";
+        Global_State.origin = "";
     }
-    char *addbuf = (char *)malloc(sizeof(char) * STR_LEN);
-    piece *head = NULL;
+    Global_State.addbuf = (char *)malloc(sizeof(char) * STR_LEN);
+    Global_State.head = NULL;
     int start = 0;
     int now = 0;
-    int cursor = strlen(origin);
-    int text_len = strlen(origin);
-    piece_list_init(&head, &origin);
+    Global_State.cursor = strlen(Global_State.origin);
+    Global_State.text_len == strlen(Global_State.origin);
+    piece_list_init(&Global_State);
     printf(TITLE);
     printf(COMMAND);
-    pieces_show(&head, cursor, &text_len);
+    pieces_show(&Global_State);
     while (state)
     {
         int input = 0;
         input = scanKeyboard();
-        // printf("%d", input);
-        if (state_control(argc, argv, &head, input, &cursor, &text_len))
+        if (state_control(argc, argv, input, &Global_State))
         {
             // Insert!
 
@@ -39,44 +33,44 @@ int main(int argc, char *argv[])
             {
                 if (now - start)
                 {
-                    piece_insert(&head, &origin, &addbuf, now - start, start, cursor);
+                    piece_insert(&Global_State, now - start, start);
                 }
-                cursor = cursor + now - start;
+                Global_State.cursor = Global_State.cursor + now - start;
                 start = now;
-                pieces_show(&head, cursor, &text_len);
+                pieces_show(&Global_State);
             }
         }
         else
         {
             if (state == STATE_INSERT)
             {
-                addbuf_append(input, &addbuf);
+                addbuf_append(input, &Global_State);
                 ++now;
             }
         }
     }
-    free(addbuf);
+    free(Global_State.addbuf);
 }
 
-void addbuf_append(char c, char **addbuf)
+void addbuf_append(char c, State *global_state)
 {
     static int i_add = 0;
     static int length = STR_LEN;
     if (i_add < length)
     {
-        (*addbuf)[i_add] = c;
+        (global_state->addbuf)[i_add] = c;
     }
     else
     {
         length *= 2;
-        *addbuf = realloc(*addbuf, length * sizeof(char));
-        if (*addbuf == NULL)
+        global_state->addbuf = realloc(global_state->addbuf, length * sizeof(char));
+        if (global_state->addbuf == NULL)
         {
             printf("Memory reallocation failed\n");
             exit(1);
         }
-        memset(*addbuf + i_add, 0, (length - i_add) * sizeof(char)); // 将新分配的内存空间设置为0
-        (*addbuf)[i_add] = c;
+        memset(global_state->addbuf + i_add, 0, (length - i_add) * sizeof(char)); // 将新分配的内存空间设置为0
+        (global_state->addbuf)[i_add] = c;
     }
     i_add++;
 }

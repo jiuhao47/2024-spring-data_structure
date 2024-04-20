@@ -72,8 +72,4 @@ CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/p
  /usr/include/x86_64-linux-gnu/asm/ioctl.h \
  /usr/include/asm-generic/ioctl.h \
  /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
- /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/piece_table.h \
- /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/linkedlist.h \
- /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/i_o_process.h \
- /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/basic_controls.h \
- /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/version_manage.h
+ /home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/build/../inc/basic_controls.h

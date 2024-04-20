@@ -1,6 +1,4 @@
 #include "basic_head.h"
-#include "linkedlist.h"
 #include "i_o_process.h"
 #include "basic_controls.h"
-#include "version_manage.h"
 #include "piece_table.h"

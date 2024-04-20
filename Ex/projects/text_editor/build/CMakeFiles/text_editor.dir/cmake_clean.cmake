@@ -1,16 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c.o"
   "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/basic_controls.c.o.d"
-  "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o"
-  "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/i_o_process.c.o.d"
-  "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o"
-  "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/linkedlist.c.o.d"
   "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o"
   "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/main.c.o.d"
   "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o"
   "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/piece_table.c.o.d"
-  "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o"
-  "CMakeFiles/text_editor.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/text_editor/src/version_manage.c.o.d"
   "text_editor"
   "text_editor.pdb"
 )
