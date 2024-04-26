@@ -246,4 +246,5 @@ int main()
     printf("Input the mode of print:");
     scanf("%d", &mode);
     Tree_print(&root, mode);
+    printf("\n");
 }

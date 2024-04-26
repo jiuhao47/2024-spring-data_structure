@@ -89,9 +89,10 @@ int main()
     Queue *tail = NULL;
     char c;
     int num;
-    printf("Enter code:");
+    printf("Input what you want to do:\ni:Patient EnQueue\ne:Patient DeQueue\nv:Show the Queue Now\nd:Destory Queue and Exit\nInput:");
     while ((c = getchar()) != 'q')
     {
+        printf("-------------------------\n");
         if (c == 'i')
         {
             printf("Insert number:");
@@ -101,29 +102,53 @@ int main()
         }
         else if (c == 'e')
         {
-            if (Queue_out(&head, &tail, &num))
+            if (head)
             {
-                printf("Exit number:%d\n", num);
+                if (Queue_out(&head, &tail, &num))
+                {
+                    printf("Exit number:%d\n", num);
+                }
+                else
+                {
+                    printf("Now Empty Queue!\n");
+                }
             }
             else
             {
-                printf("Now Empty Queue!\n");
+                printf("Queue Not Exist\n");
             }
         }
         else if (c == 'd')
         {
-            Queue_destory(&head, &tail);
+            if (head)
+            {
+                Queue_destory(&head, &tail);
+                printf("Queue Destory\n");
+                printf("-------------------------\n");
+                exit(0);
+            }
+            else
+            {
+                printf("Queue Not Exist\n");
+            }
         }
         else if (c == 'v')
         {
-            Queue_visit(&head, &tail);
+            if (head)
+            {
+                Queue_visit(&head, &tail);
+            }
+            else
+            {
+                printf("Queue Not Exist\n");
+            }
         }
         else
         {
             printf("Invalid Code!\n");
         }
-
         getchar();
-        printf("\nEnter code:");
+        printf("-------------------------\n");
+        printf("\nInput what you want to do:\ni:Patient EnQueue\ne:Patient DeQueue\nv:Show the Queue Now\nd:Destory Queue and Exit\nInput:");
     }
 }
