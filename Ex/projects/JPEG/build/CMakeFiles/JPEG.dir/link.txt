@@ -1,0 +1,1 @@
+/usr/bin/cc -g -rdynamic CMakeFiles/JPEG.dir/home/jiuhao/Workspace/2024-Spring/data_structure/Ex/projects/JPEG/src/main.c.o -o JPEG 
