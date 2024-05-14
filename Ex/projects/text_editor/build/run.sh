@@ -2,4 +2,4 @@
 
 cmake .
 make
-# ./text_editor
+./text_editor

@@ -1,0 +1,568 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	JPEG Minimum Coded Unit (MCU) and Partial MCU - ShiZhixin的专栏 - CSDN博客
+</title>
+	<script src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/jquery-1.js" type="text/javascript"></script>
+	<script src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/jquery.js" type="text/javascript"></script>
+	<script src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/highlighter.js" type="text/javascript"></script>
+	<script src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/common.js" type="text/javascript"></script>
+	<link href="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/arrow_1.css" type="text/css" rel="stylesheet" media="all"><link href="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/csdn_favbykimi.css" type="text/css" rel="stylesheet" media="all"><link rel="Shortcut Icon" href="http://profile.csdn.net/ShiZhixin/picture/1.ico"><link href="http://feeds.feedsky.com/csdn.net/ShiZhixin" title="RSS" type="application/rss+xml" rel="alternate"></head><body id="defaultuser">
+	<div id="csdnblog_allwrap">
+	    <div id="csdnblog_midwrap">
+		    
+<div id="csdnblog_header">
+    <h1><a href="http://blog.csdn.net/ShiZhixin">ShiZhixin的专栏</a></h1><h2></h2>
+    <ul id="personalnav">
+		<li style=""><a id="a_login" href="http://passport.csdn.net/UserLogin.aspx?from=http%3A%2F%2Fblog.csdn.net%2FShiZhixin%2Farchive%2F2009%2F08%2F29%2F4497341.aspx">登录</a></li>
+		<li style=""><a id="a_register" href="http://passport.csdn.net/CSDNUserRegister.aspx">注册</a></li>
+		<li style="display: none;"><a id="a_welcome" href="http://hi.csdn.net/" target="_blank">欢迎</a></li>
+		<li style="display: none;"><a id="a_exit" href="http://writeblog.csdn.net/Signout.aspx">退出</a></li>
+		<li style="display: none;"><a id="a_myblog" href="http://blog.csdn.net/">我的博客</a></li>
+		<li style="display: none;"><a id="a_configure" href="http://writeblog.csdn.net/configure.aspx" target="_blank">配置</a></li>
+		<li style="display: none;"><a id="a_postedit" href="http://writeblog.csdn.net/PostEditPlain.aspx" target="_blank">写文章</a></li>
+		<li style="display: none;"><a id="a_postlist" href="http://writeblog.csdn.net/PostList.aspx" target="_blank">文章管理</a></li>
+		<li style="display: none;"><a id="a_bloghome" href="http://blog.csdn.net/" target="_blank">博客首页</a></li>
+	</ul>
+    <ul id="blogsearchsty">
+		<li><input id="inputSearch" class="bolgsearch" type="text"></li>
+		<li class="selectsty">
+			<select name="Search:ddlSearchScope" id="Search_ddlSearchScope">
+				<option selected="selected" value="all">全站</option>
+				<option value="ShiZhixin">当前博客</option>
+			</select>
+		</li>
+		<li><input id="buttonSearch" value="搜索" class="bolggobtn" type="button"></li>
+	</ul>
+    <ul id="menu">
+		<li><a href="http://hi.csdn.net/ShiZhixin" target="_blank">空间</a></li>
+		<li><a class="on" href="http://blog.csdn.net/ShiZhixin">博客</a></li>
+		<li><a href="http://hi.csdn.net/%21s/friend/list/ShiZhixin" target="_blank">好友</a></li>
+		<li><a href="http://hi.csdn.net/%21s/album/list/ShiZhixin" target="_blank">相册</a></li>
+		<li><a class="last" href="http://hi.csdn.net/%21s/wall/to/ShiZhixin" target="_blank">留言</a></li>
+	</ul>
+</div>
+<script type="text/javascript">
+	var CurrentUserName = 'ShiZhixin';
+</script>
+		    
+<div id="csdnblog_sidebar">
+	<div class="gutter">
+		<div class="aboutauthor">
+			<dl>
+				<dt style="text-align: left;">用户操作</dt>
+				<dd class="middle">
+					<a href="http://hi.csdn.net/%21s/wall/to/ShiZhixin" target="_blank">[留言]</a>&nbsp;
+					<a href="http://hi.csdn.net/%21s/msg/to/ShiZhixin" target="_blank">[发消息]</a>&nbsp;
+					<a href="http://hi.csdn.net/%21s/friend/add/ShiZhixin" target="_blank">[加为好友]</a>&nbsp;
+				</dd>
+				<dt style="text-align: left;">    <a href="http://hi.csdn.net/ShiZhixin">ShiZhixin</a><span>ID：<a href="http://hi.csdn.net/ShiZhixin">ShiZhixin</a></span></dt><dd class="middle">    <a href="http://hi.csdn.net/ShiZhixin"><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/1_ShiZhixin.gif" alt=""></a></dd><dd class="middle">    <a href="http://hi.csdn.net/cp.php?ac=avatar"></a></dd><dd style="text-align: left;">    共<em>291</em>次访问，排名<em>2万外</em>，<a href="http://hi.csdn.net/%21s/friend/list/ShiZhixin">好友</a><em>0</em>人，<a href="http://hi.csdn.net/%21s/follow/list/ShiZhixin">关注者</a><em>0</em>人。<br></dd><dd style="text-align: left;">    </dd><dt style="text-align: left;">ShiZhixin的文章</dt><dd style="text-align: left;">原创 11 篇</dd><dd style="text-align: left;">翻译 0 篇</dd><dd style="text-align: left;">转载 28 篇</dd><dd style="text-align: left;">评论 0 篇</dd> 
+				<span id="SubscriptionList">
+					<dt style="text-align: left;">订阅我的博客</dt>
+					<dd style="text-align: left;">
+						<a href="http://feeds.feedsky.com/csdn.net/ShiZhixin">
+							<img alt="XML聚合" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/gif.gif" border="0">
+						</a>&nbsp;&nbsp;
+						<a href="http://feeds.feedsky.com/csdn.net/ShiZhixin" target="_blank">
+							<img alt="FeedSky" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/feedsky.gif" border="0">
+						</a>
+					</dd>
+					<dd style="text-align: left;">
+						<a href="http://www.xianguo.com/subscribe.php?url=http://feeds.feedsky.com/csdn.net/ShiZhixin" target="_blank">
+							<img alt="订阅到鲜果" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/rss_xianguo.jpg" border="0">
+						</a>
+					</dd>
+					<dd style="text-align: left;">
+						<a href="http://fusion.google.com/add?feedurl=http://feeds.feedsky.com/csdn.net/ShiZhixin" target="_blank">
+							<img alt="订阅到Google" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/rss_google.gif" border="0">
+						</a>
+					</dd>
+					<dd style="text-align: left;">
+						<a href="http://www.zhuaxia.com/add_channel.php?url=http://feeds.feedsky.com/csdn.net/ShiZhixin" target="_blank">
+							<img alt="订阅到抓虾" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/rss_zhuaxia.gif" border="0">
+						</a>
+					</dd>
+				</span>
+				<dt style="text-align: left;">
+					ShiZhixin的公告
+				</dt>
+				<dd style="text-align: left;">转贴的文章很多都未表明出处，皆从网络转来。如有侵犯，请告知，并表示歉意。</dd>
+				<dt style="text-align: left;">文章分类</dt>
+				<dd style="text-align: left;">
+					<div class="publiclist_sidebar">
+						<ul><li><a href="http://blog.csdn.net/ShiZhixin/category/581206.aspx/rss"><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/rss.gif" alt="(RSS)"></a><a href="http://blog.csdn.net/ShiZhixin/category/581206.aspx">Algorithm</a></li><li><a href="http://blog.csdn.net/ShiZhixin/category/586792.aspx/rss"><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/rss.gif" alt="(RSS)"></a><a href="http://blog.csdn.net/ShiZhixin/category/586792.aspx">JPG编解码</a></li><li><a href="http://blog.csdn.net/ShiZhixin/category/571162.aspx/rss"><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/rss.gif" alt="(RSS)"></a><a href="http://blog.csdn.net/ShiZhixin/category/571162.aspx" title="C\C++\JAVA&lt;br /&gt;">Program</a></li><li><a href="http://blog.csdn.net/ShiZhixin/category/586500.aspx/rss"><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/rss.gif" alt="(RSS)"></a><a href="http://blog.csdn.net/ShiZhixin/category/586500.aspx">其他</a></li><li><a href="http://blog.csdn.net/ShiZhixin/category/586810.aspx/rss"><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/rss.gif" alt="(RSS)"></a><a href="http://blog.csdn.net/ShiZhixin/category/586810.aspx">原创</a></li></ul>
+					</div>
+				</dd>
+				
+				
+				<dt style="text-align: left;">存档</dt>
+				<dd style="text-align: left;">
+					<div class="publiclist_sidebar">
+						<ul><li><a href="http://blog.csdn.net/ShiZhixin/archive/2009/09.aspx">2009年09月(13)</a></li><li><a href="http://blog.csdn.net/ShiZhixin/archive/2009/08.aspx">2009年08月(22)</a></li><li><a href="http://blog.csdn.net/ShiZhixin/archive/2009/07.aspx">2009年07月(3)</a></li><li><a href="http://blog.csdn.net/ShiZhixin/archive/2009/05.aspx">2009年05月(1)</a></li></ul>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+
+		    
+<div id="csdnblog_content">
+	<div class="gutter">
+		<div class="default_contents">
+			<div class="user_article">
+				<script type="text/javascript" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/LoadFeedbackCount.js"></script>
+				<h1 class="title_txt">
+					
+					JPEG Minimum Coded Unit (MCU) and Partial MCU
+					<cite class="fav_csdnstylebykimi">
+						<a href="javascript:d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(saveit=window.open('http://wz.csdn.net/storeit.aspx?t='+escape(d.title)+'&amp;u='+escape(d.location.href)+'&amp;c='+escape(t),'saveit','scrollbars=no,width=590,height=300,left=75,top=20,status=no,resizable=yes'));saveit.focus();" class="fav_csdnstylebykimi" title="收藏到我的网摘中，并分享给我的朋友">收藏</a>
+					</cite>
+					
+				</h1>
+				<div class="blogstory">
+					<script type="text/javascript">
+						document.body.oncopy = function() {
+							if (window.clipboardData) {
+								setTimeout(function() {
+									var text = clipboardData.getData("text"); 
+									if (text && text.length>300) {
+										text = text + "\r\n\n本文来自CSDN博客，转载请标明出处：" + location.href;
+										clipboardData.setData("text", text); 
+									}
+								}, 100);
+							}
+						}
+					</script>
+					<script type="text/javascript">function StorePage(){d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(keyit=window.open('http://www.365key.com/storeit.aspx?t='+escape(d.title)+'&u='+escape(d.location.href)+'&c='+escape(t),'keyit','scrollbars=no,width=475,height=575,left=75,top=20,status=no,resizable=yes'));keyit.focus();}</script>
+					<p>
+</p><div class="title">
+<h1 id="title4"><span style="font-weight: normal; font-size: 12px;">This
+page should gives some background on how JPEG images are actually
+defined by 8x8 pixel blocks called the Minimum Coded Unit. This article
+should help one understand what happens with&nbsp;<a href="http://www.impulseadventure.com/photo/rotation-partial-mcu.html">lossless rotation on odd-sized images</a>.</span></h1>
+</div>
+<div class="content">
+<h2>The breakdown of an image into MCUs</h2>
+<p>Every JPEG image is actually stored as a series of compressed&nbsp;<em>image tiles</em>&nbsp;that are usually only&nbsp;<span class="value">8x8</span>&nbsp;pixels in size. The proper name for one of these tiles is the&nbsp;<strong>MCU</strong>&nbsp;or&nbsp;<strong>Minimum Coded Unit</strong>. When one refers to image&nbsp;<em>blocking artifacts</em>,
+they are really talking about visual discontinuities observed between
+one or more of these tiles. You can see the edges or boundaries of
+these tiles in JPEG images that have been compressed at a very low
+quality.</p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<th class="cap">JPEG Image</th>
+<td width="20">&nbsp;</td>
+<th class="cap">JPEG Image at Low Quality</th>
+</tr>
+<tr>
+<td><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/mcu_orig_4x.png" alt=""></td>
+<td>&nbsp;</td>
+<td><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/mcu_low_4x.png" alt=""></td>
+</tr>
+<tr>
+<td colspan="3"><br>The images below show the&nbsp;<span class="value">8x8</span>&nbsp;boundaries of the MCU tiles<br></td>
+</tr>
+<tr>
+<td><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/mcu_orig_4x_grid.png" alt=""></td>
+<td>&nbsp;</td>
+<td><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/mcu_low_4x_grid.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<p>If you look carefully at the low-quality JPEG image, you will notice
+some of the boundaries of the MCU, as you will see abrupt changes in
+color and / or intensity. This is because each of these MCU tiles is
+compressed separately and different amounts of information is discarded
+from each tile.</p>
+<table border="0">
+<tbody>
+<tr>
+<td><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/mcu_low_4x_desc.png" alt="" border="0"></td>
+</tr>
+<tr>
+<td>
+<p class="cap">Demonstrating the MCU boundaries</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The Minimum Coded Unit size for JPEG images is usually&nbsp;<span class="value">8x8</span>,&nbsp;<span class="value">16x8</span>&nbsp;or&nbsp;<span class="value">16x16</span>&nbsp;pixels in size. The variations here (more specifically<span class="value">16x8</span>&nbsp;and&nbsp;<span class="value">16x16</span>) are due to an optimization called&nbsp;<a href="http://www.impulseadventure.com/photo/chroma-subsampling.html">chroma subsampling</a>.</p>
+<p>For&nbsp;<a href="http://www.impulseadventure.com/photo/jpeg-compression.html">JPEG compression</a>&nbsp;and
+decompression algorithms to work, an image must be represented by an
+integer number of complete MCUs. In other words, the&nbsp;<span class="value">X</span>&nbsp;and&nbsp;<span class="value">Y</span>&nbsp;dimensions typically need to be a multiple of&nbsp;<span class="value">8</span>&nbsp;pixels. Therefore, an image that is sized&nbsp;<span class="value">501 x 375</span>&nbsp;must be first changed into an image sized&nbsp;<span class="value">504 x 376</span>&nbsp;before
+it can be compressed. In this example, 501 = 62 horizontal MCUs + 3
+extra pixels and 375 is 46 vertical MCUs + 1 extra pixel.</p>
+<h2>Partial MCU and Odd-sized JPEG images</h2>
+<p>In the case where there are not enough pixels in a row or column to complete a full tile, a&nbsp;<strong>partial MCU</strong>&nbsp;is
+used. A partial MCU is automatically extended to be the size of a full
+MCU but then the overall image dimensions are used to indicate where to
+cut off the extra later. This extension is generally done by repeating
+the last pixel of the row or column as necessary.</p>
+<p>For the purposes of this discussion, I refer to images that contain partial MCU as an&nbsp;<strong>odd-sized image</strong>.
+In other words, if an image's overall dimensions are not a multiple of
+8x8, then it is likely to contain partial MCU and therefore be termed
+an odd-sized image.</p>
+<p>For more information about partial minimum coded units and how they affect image rotation, please see:&nbsp;<a href="http://www.impulseadventure.com/photo/rotation-partial-mcu.html">Lossless rotation &amp; Partial MCU</a>&nbsp;and&nbsp;<a href="http://www.impulseadventure.com/photo/lossless-rotation-digicam.html">Digicams and Lossless Rotation</a>.</p>
+</div>
+<div class="comments">
+
+<ins><ins></ins></ins>
+<hr>
+<a name="comments"></a>
+<table border="0" width="600">
+<tbody>
+<tr>
+<td>
+<h2>Reader's Comments:</h2>
+<span class="small">Please leave your comments or suggestions below!</span></td>
+<td><form action="http://www.impulseadventure.com/notify.php" method="post"><input value="Notify me of Page Updates" type="submit"></form><form action="http://www.impulseadventure.com/notify.php" method="post"><input value="Notify me of New Comments" type="submit"></form></td>
+</tr>
+</tbody>
+</table>
+<table class="comments" border="0" cellpadding="5" cellspacing="5">
+<tbody>
+<tr>
+<td class="cmt_list_date" width="60">2009-08-19</td>
+<td class="cmt_list_row">Chiang</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">Thank you ! This article is very informative and it help me a lot when I was trying to read IJG source codes...</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2009-03-26</td>
+<td class="cmt_list_row">sandy</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">First of all thanks for the MCU explanation.&nbsp;<br>I
+have a question about the luma (Y) and two chrominance (UV) components,
+how they are related to MCU? Each YUV component will have one MCU each?
+How can we find the total number of MCU in image corresponding to luma
+(Y) and two chrominance (UV) components.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2009-03-10</td>
+<td class="cmt_list_row">termostat</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">I have one more question about getting the MCU
+data from the stream. I was looking all over the internet but I can't
+find any usable informations on how to decode the jpg scan data. First
+of all I need to get the RLC-coded data of the first MCU. I know that
+this data are Huffman encoded and I know that the first information in
+the scan should be the first MCU's DC + 63 AC values (RLC-coded). But I
+can't find the way to decode them.<br>I have all the informations
+extracted from the jpg header and now I would need to know what should
+I do. I mean "You should read the first bit from the stream and
+than...".<br>Could you please help me or give me some pages where to find this informations ? Thanks.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">The best source of this information is to have a read through the ITU-T spec which is&nbsp;<a href="http://www.w3.org/Graphics/JPEG/itu-t81.pdf">freely available</a>&nbsp;on
+the web, and then experiment from there to get your decoder working.
+There are some examples of source code for decoders elsewhere, but
+you'll get a much firmer understanding by developing your own from the
+spec. Besides, some of these are complicated greatly by attempts to
+incorporate performance improvements into the code. Good luck!</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2009-03-09</td>
+<td class="cmt_list_row">termostat</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">I have allmost the same question as Mark. If
+there are no tags for MCU, how do you find out the MCU length ? How can
+I find out how many bytes will the MCU have in the data stream ?</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">Unfortunately, you will need to perform the
+huffman decoding in order to find out the individual MCU boundaries.
+The boundaries can occur on any bit alignment in the data stream (not
+byte).</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2009-01-19</td>
+<td class="cmt_list_row">Mark</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">How do you find the beginning and end of each
+MCU in the data stream? Is there a tag or a marker? Or are they encoded
+in a standard length?</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">Generally, no. The JPEG bitstream has nearly
+all redundancy removed, which makes it very hard to delineate the
+boundaries of MCUs. However, some digital cameras do take advantage of
+the Restart markers, which may appear every X MCUs (eg. every 4 MCUs).
+You can use these to regain position, but even then they only reflect a
+position in sequence 10 markers long, so there is no absolute
+positioning.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2008-07-22</td>
+<td class="cmt_list_row">kinki</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">Thank you for your information!<br>I have a
+question, if a mcu is equal to a block, i can use a block instead of
+mcu ,what's the mcu existing for? Is there other function on mcu?<br>Thank you!</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">The MCU is used in the JPEG compression
+format to help keep all of the sub-sampled image components together.
+If there is no chroma subsampling, then the MCU can be treated somewhat
+similarly to a block.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2008-03-11</td>
+<td class="cmt_list_row">rani</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">it was very useful na di think it helped in deoding jpeg image files</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">Great!</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_row">&nbsp;</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2007-12-15</td>
+<td class="cmt_list_row">dave</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">Thanks for the article. How can it be
+determined (for example, programmatically) the dimensions of the MCU
+for a particular jpg file.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">The best way is to search for the&nbsp;<span class="value">JFIF SOF0</span>&nbsp;marker (<span class="value">0xFFC0</span>),
+and about 9 bytes later you will find a list of entries, one per
+component that indicate the sampling factor. With a byte sequence
+of&nbsp;<span class="value">0x 01 22 00 02 11 01 03 11 01</span>, you can interpret this as:<br><br>
+<table class="tbl_stats" border="0">
+<tbody>
+<tr>
+<th>Comp</th><th>Chan</th><th>Hex Values</th><th>Ind</th><th>SF</th><th>QTbl</th>
+</tr>
+<tr>
+<td>1</td>
+<td>Y</td>
+<td class="value">x012200</td>
+<td>01</td>
+<td>22</td>
+<td>00</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cb</td>
+<td class="value">x021101</td>
+<td>02</td>
+<td>11</td>
+<td>01</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Cr</td>
+<td class="value">x031101</td>
+<td>03</td>
+<td>11</td>
+<td>01</td>
+</tr>
+</tbody>
+</table>
+In the above, you want to look for the SF (Sampling Factor) values. It
+actually tells you the number of entries per MCU of that channel (in
+both Horizontal and Vertical dimensions). Thus, for the above, we see
+that Y appears 4 times per MCU (2x2) before each of the chrominance
+components.<br><br>To get the dimension, multiply this by 8x8 pixels for each block. So we end up with a&nbsp;<span class="value">16x16</span>&nbsp;pixel MCU. Hope that is helpful!</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2007-12-06</td>
+<td class="cmt_list_row">Vijay</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">Good, to-the-point introduction to MCUs.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2007-06-05</td>
+<td class="cmt_list_row">vine</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">very informative article, very well explained.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2007-05-31</td>
+<td class="cmt_list_row">Manish Kumar</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">I find that usually it use 8x8 MCU. Which applications do we use 16x16 or 16x8?</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">Images without chroma subsampling generally have an&nbsp;<span class="value">8x8</span>&nbsp;MCU. With chroma subsampling on low-end digital cameras (<span class="value">4:2:0</span>&nbsp;or 2x2), we'll see&nbsp;<span class="value">16x16</span>, while most other digital cameras (<span class="value">4:2:2</span>&nbsp;or 2x1) we'll see&nbsp;<span class="value">16x8</span>.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2007-03-27</td>
+<td class="cmt_list_row">francis</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">Very good, I'm learning for my test and it helped me a lot! Thx</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2007-03-09</td>
+<td class="cmt_list_row">Ray</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">Hi there&nbsp;<br>You explain so well on JPEG MCU,&nbsp;<br>I learn a lot from it, THANKS !!!<br><br>However, I got a question here<br><br>Is it necessary to define MCU?<br>why don't we just apply DCT on the whole image?<br>I guess i miss something in the middle.<br><br>Thanks in advance ,&nbsp;<br>peace<br>Ray</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">Performing the DCT transform is a
+computationally difficult task. By breaking the original image down
+into smaller blocks, the calculation can be dealt with much more
+easily. Plus, it allows decoders or encoders to reduce the amount of
+image information that they need to keep in memory at one time. Some
+algorithms use larger blocks, such as 16x16 (some forms of MPEG
+compression), which helps compress larger regions of similar color, but
+that's about as large a block size as you'll find.<br><br>By using a
+much larger block size (or the full image size!), you would not easily
+be able to achieve the same compression quality.<br><br>In hardware
+implementations, the breaking down of the image into blocks has the
+added advantage of enabling the encoder or decoder to work on several
+blocks in parallel, thereby increasing compression performance
+significantly.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2007-01-11</td>
+<td class="cmt_list_row">Ameen</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">Hi,<br>Its really good explanation, One can easily understand about MCU.<br>-Ameen</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2006-07-30</td>
+<td class="cmt_list_row">mark</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">did you know wikipedia does not have an
+article on MCU? have you considered submitting your article to
+wikipedia as i think it is an excellent explanation.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_resp">Thanks for the comment! You're right -- I am
+surprised to see no definition there. I'll look into it, as it may help
+others as a starting point. Thx, Cal.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2006-07-17</td>
+<td class="cmt_list_row">chunchun</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">Good. It is esay to be understood.</td>
+</tr>
+<tr>
+<td class="cmt_list_date" width="60">2006-02-20</td>
+<td class="cmt_list_row">natasha</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td class="cmt_list_txt">hi,<br><br>really interesting and informative stuff about jpeg. learnt quite a bit.<br>cheers,<br>natasha</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+					<p class="right articalinfo">
+						发表于 @ 2009年08月29日　18:01:00&nbsp;|
+						<a id="a_comment" href="#FeedBack" title="评论">
+							评论(
+							<span id="FeedbackCount_4497341">0</span>
+							<script type="text/javascript">
+								AddFeedbackCountStack("4497341")
+							</script>)
+						</a>|
+						<span style="display: none;"><a id="a_postedit" href="http://writeblog.csdn.net/PostEdit.aspx?entryId=4497341" title="编辑">编辑</a>|</span>
+						<a href="mailto:yuexn@csdn.net?subject=Article%20Report%21%21%21&amp;body=Author:ShiZhixin%0D%0AURL:http://blog.csdn.net/ArticleContent.aspx?UserName=ShiZhixin&amp;Entryid=4497341">举报</a>|
+						<cite class="fav_csdnstylebykimi">
+							<a href="javascript:d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(saveit=window.open('http://wz.csdn.net/storeit.aspx?t='+escape(d.title)+'&amp;u='+escape(d.location.href)+'&amp;c='+escape(t),'saveit','scrollbars=no,width=590,height=300,left=75,top=20,status=no,resizable=yes'));saveit.focus();" class="fav_csdnstylebykimi" title="收藏到我的网摘中，并分享给我的朋友">收藏</a>
+						</cite>
+					</p>
+					<span id="Post.ascx_ViewPost_PreviousAndNextEntriesDown"><h3 class="pagego"><a href="http://blog.csdn.net/ShiZhixin/archive/2009/08/29/4497318.aspx">旧一篇:  Optimization of JPEG (JPG) images: good quality and small size</a>&nbsp;|&nbsp;<a href="http://blog.csdn.net/ShiZhixin/archive/2009/08/29/4497352.aspx">新一篇:一定要坚持!</a></h3></span>
+				</div>
+			</div>
+			<a name="FeedBack"></a>
+			<div class="commentslist">
+				<script type="text/javascript">
+					var CurrentEntryId = '4497341';
+				</script>
+				<script type="text/javascript" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/feedback.js"></script>
+				<div id="commentslist"></div>
+			</div>
+			<div class="spacecommment">
+			<fieldset><legend>给ShiZhixin的留言<dfn>只有注册用户才能发表评论！<a href="http://passport.csdn.net/member/UserLogin.aspx?from=http://blog.csdn.net/ShiZhixin/archive/2009/08/29/4497341.aspx">登录</a><a href="http://passport.csdn.net/CSDNUserRegister.aspx">注册</a></dfn></legend><em><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/blog_commentnotice.gif" alt="" title=""></em><ul><li>姓&nbsp;&nbsp;&nbsp;名：<input size="25" type="text"></li><li>校验码：<input size="25" type="text"></li></ul><textarea cols="50" rows="8"></textarea><input value="提交留言" class="submitbtn" type="button"></fieldset></div>
+			<script type="text/javascript">
+			LoadFeedbackCount();
+			document.write("<img src='http://counter.csdn.net/pv.aspx?id=24' border=0 width=0 height=0>");
+			</script><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/pv.xml" border="0" height="0" width="0">
+		</div>
+	</div>
+</div>
+		    
+<div id="pubfooter">
+<dl>
+	<dt></dt>
+	<dd>Csdn Blog version 3.1a</dd>
+	<dd>Copyright © ShiZhixin</dd>
+</dl>
+</div>
+
+<script type="text/javascript" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/counter.js"></script><script type="text/javascript" charset="UTF-8" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/msg.js"></script><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/visitlog.htm" alt="" border="0" height="1" width="1"><iframe id="myframe" name="myframe" border="0" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/dd333.htm" scrolling="no" frameborder="no" height="0" width="0"></iframe>
+<script type="text/javascript" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/ga.js"></script>
+<script type="text/javascript">
+try {
+	var pageTracker = _gat._getTracker("UA-2688088-9");
+	pageTracker._trackPageview();
+} catch (err) { }
+</script>
+
+
+	    </div>
+    </div>
+    <img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/count.htm" height="0" width="0">
+<link type="text/css" rel="stylesheet" href="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/message2.css"><div id="_popup_msg_container" style="display: block;"><!--2009-09-10-->
+
+<div style="display: none; height: 4px;" wistate="max" id="im_popupWindow_miniMsg" class="im_popupWindow">
+	<h6 class="wi_draggable"><a href="http://sd2china.csdn.net/" target=" _blank" style="color: rgb(0, 0, 0); display: block; text-align: left; width: 200px; font-size: 12px; font-family: '微软雅黑','宋体',Arial;">SD大会最后抢票机会！</a>           
+	<a onclick="_message_tips_pop('down');return false;" href="#"><img alt="colse" class="founctionpic3" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/csdnim080507verpic3.gif">    </a></h6>
+    <div id="im_popupWindow_miniMsgContent" class="wi_content">
+      <div class="kuai">
+<div><a href="http://sd2china.csdn.net/"><img src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/280x210-1.jpg"></a>
+</div></div></div></div></div><img style="display: none;" src="JPEG%20Minimum%20Coded%20Unit%20%28MCU%29%20and%20Partial%20MCU_files/count_new.htm"></body></html>

@@ -10,6 +10,7 @@
         "stdbool.h": "c",
         "piece_table.h": "c",
         "basic_head.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "math.h": "c"
     }
 }

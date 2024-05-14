@@ -106,7 +106,6 @@ bool pieces_show(State *global_state)
         }
         for (int i = 0; i < (*p).length; i++)
         {
-
             printf("%c", (*((*p).text))[(*p).start + i]);
             ++place;
             if (global_state->cursor == place)
