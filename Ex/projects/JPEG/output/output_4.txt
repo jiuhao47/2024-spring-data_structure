@@ -1,0 +1,93 @@
+File_Info: ../test/Test_Image_4.jpg
+File size: 375172 bytes
+Read 375172 bytes
+----------------APP0 START----------------
+ APP0 is Lacked!
+
+----------------APP0 END------------------
+----------------DQT START----------------
+ Marker: FF DB 
+ Length: 84
+
+ DQT Precision: 8
+ DQT Target: Y
+ DQT TABLE:
+ 07 05 06 07 06 05 08 07
+ 06 07 05 08 08 09 0C 13
+ 0D 0C 0B 0B 0D 18 11 12
+ 0F 13 1A 19 1E 1C 1B 19
+ 1B 1A 1E 22 2A 25 1F 21
+ 28 21 1B 1D 26 32 27 29
+ 2C 2F 31 31 31 20 27 35
+ 38 35 30 38 2D 30 31 30
+
+ DQT Precision: 8
+ DQT Target: C
+ DQT TABLE:
+ 08 08 08 0C 0A 0C 17 0D
+ 0D 17 30 20 1B 20 30 30
+ 30 30 30 30 30 30 30 30
+ 30 30 30 30 30 30 30 30
+ 30 30 30 30 30 30 30 30
+ 30 30 30 30 30 30 30 30
+ 30 30 30 30 30 30 30 30
+ 30 30 30 30 30 30 30 30
+----------------DQT END------------------
+----------------DHT START----------------
+ Marker: FF C4
+
+ DHT CLASS: DC
+ DHT TARGET: Y
+ DHT KEY Length List (16 BYTE):
+ 00 02 03 01 01 01 01 00
+ 00 00 00 00 00 00 00 00
+ DHT KEY TABLE
+ 02 03 01 04 05 00 06 07 08
+    00 -> 02
+    01 -> 03
+    100 -> 01
+    101 -> 04
+    110 -> 05
+    1110 -> 00
+    11110 -> 06
+    111110 -> 07
+    1111110 -> 08
+
+ DHT CLASS: DC
+ DHT TARGET: C
+ DHT KEY Length List (16 BYTE):
+ 01 01 01 01 01 01 01 00
+ 00 00 00 00 00 00 00 00
+ DHT KEY TABLE
+ 01 00 02 03 04 05 06
+    0 -> 01
+    10 -> 00
+    110 -> 02
+    1110 -> 03
+    11110 -> 04
+    111110 -> 05
+    1111110 -> 06
+----------------DHT END------------------
+----------------SOF START----------------
+ SOF is Lacked!
+----------------SOF END------------------
+----------------SOS START----------------
+ Marker: FF DA
+ Length: 12
+ Components: 3
+ Component Info: 
+  Component ID: 1
+  DC Huffman Table Selector: 0
+  AC Huffman Table Selector: 0
+  Component ID: 2
+  DC Huffman Table Selector: 1
+  AC Huffman Table Selector: 0
+  Component ID: 3
+  DC Huffman Table Selector: 1
+  AC Huffman Table Selector: 0
+ Start Spectral Selection: 0
+ End Spectral Selection: 0
+ Approximation High Bit: 0
+----------------SOS END------------------
+----------------RST Start----------------
+----------------RST END------------------

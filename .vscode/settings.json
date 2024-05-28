@@ -12,5 +12,6 @@
         "basic_head.h": "c",
         "stdio.h": "c",
         "math.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }

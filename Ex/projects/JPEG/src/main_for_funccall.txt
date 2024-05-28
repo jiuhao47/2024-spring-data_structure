@@ -1,0 +1,614 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include "definations.h"
+#include "structures.h"
+// : 解码DC和AC系数
+// : 逆量化
+// : 逆离散余弦变换
+// : 颜色空间转换
+void SEGS_read(unsigned char *buffer, int fileSize, APP0 **app0, DQT **dqt, SOF **sof, DHT **dht, SOS **sos, int *image_start);
+void APP0_read(APP0 *app0, unsigned char *buffer, int start, int length);
+void DQT_read(DQT *dqt, unsigned char *buffer, int start, int length);
+void DHT_read(DHT *dht, unsigned char *buffer, int start, int length);
+void SOF_read(SOF *sof, unsigned char *buffer, int start, int length);
+void SOS_read(SOS *sos, unsigned char *buffer, int start, int length);
+void Stack_init(Stack **stack);
+void Stack_push(Stack **stack, int data);
+void Stack_pop(Stack **stack, int *data);
+void Stack_destory(Stack **stack);
+void SEGS_print(HuffmanTree **huffmanTree, APP0 *app0, DQT *dqt, SOF *sof, DHT *dht, SOS *sos, unsigned char *buffer, int image_start, int fileSize);
+void DHT_print(DHT *dht, HuffmanTree **huffmanTree);
+void DQT_print(DQT *dqt);
+void APP0_print(APP0 *app0);
+void SOF_print(SOF *sof);
+void SOS_print(SOS *sos);
+void RST_print(unsigned char *buffer, int image_start, int fileSize);
+void HuffmanTree_init(HuffmanTree **huffmanTree, DHT *dht);
+void HuffmanTree_build(HuffmanTree **HuffmanTree, int *key_length, int *key);
+void HuffmanTree_insert(HuffmanTree **huffmanTree, Stack **head, int code, int key, int length);
+void Huffman_leaf_print(HuffmanTree *huffmanTree, int code, int depth);
+void HuffmanTree_destory(HuffmanTree **huffmanTree);
+bool file_read(unsigned char **buffer, int *fileSizeOut);
+
+void HuffmanTree_init(HuffmanTree **huffmanTree, DHT *dht)
+{
+    int p = 0;
+    int huffmanTree_index = 0;
+    while (p < dht->length - 2)
+    {
+        int index = (dht->table[p] & 0x0F) + (dht->table[p] >> 3);
+        int key_length[16];
+        // 长度为16的数组，存储每个长度的码字数
+        p = p + 1;
+        int sum = 0;
+        for (int i = 0; i < 16; i++)
+        {
+            key_length[i] = dht->table[p + i];
+            sum = sum + dht->table[p + i];
+        }
+        int key[sum];
+        p = p + 16;
+        for (int i = 0; i < sum; i++)
+        {
+            key[i] = dht->table[p + i];
+        }
+        p = p + sum;
+        HuffmanTree_build(&(huffmanTree[huffmanTree_index]), key_length, key);
+        huffmanTree_index = huffmanTree_index + 1;
+    }
+}
+
+void HuffmanTree_build(HuffmanTree **HuffmanTree, int *key_length, int *key)
+{
+    Stack *head = NULL;
+    Stack_init(&head);
+    int code = 0;
+    int key_index = 0;
+    for (int i = 0; i < 16; i++)
+    {
+        for (int j = 0; j < key_length[i]; j++)
+        {
+            int count = 0;
+            int temp = code;
+            while (temp > 0 || count <= i)
+            {
+                Stack_push(&head, temp % 2);
+                temp = temp >> 1;
+                count = count + 1;
+            }
+            HuffmanTree_insert(HuffmanTree, &head, code, key[key_index], i);
+            code = code + 1;
+            key_index = key_index + 1;
+        }
+        code = code << 1;
+    }
+    Stack_destory(&head);
+}
+
+void HuffmanTree_insert(HuffmanTree **huffmanTree, Stack **head, int code, int key, int length)
+{
+    HuffmanTree *temp = *huffmanTree;
+    while ((*head)->next != NULL)
+    {
+        int data;
+        Stack_pop(head, &data);
+        if (data == 0)
+        {
+            if (temp->left == NULL)
+            {
+                HuffmanTree *node = (HuffmanTree *)malloc(sizeof(HuffmanTree));
+                node->value = key;
+                node->left = NULL;
+                node->right = NULL;
+                temp->left = node;
+                temp = temp->left;
+            }
+            else
+            {
+                temp = temp->left;
+            }
+        }
+        else if (data == 1)
+        {
+            if (temp->right == NULL)
+            {
+                HuffmanTree *node = (HuffmanTree *)malloc(sizeof(HuffmanTree));
+                node->value = key;
+                node->left = NULL;
+                node->right = NULL;
+                temp->right = node;
+                temp = temp->right;
+            }
+            else
+            {
+                temp = temp->right;
+            }
+        }
+    }
+}
+
+void Huffman_leaf_print(HuffmanTree *huffmanTree, int code, int depth)
+{
+    if (huffmanTree->left == NULL && huffmanTree->right == NULL)
+    {
+        // printf("    ");
+        Stack *head = NULL;
+        Stack_init(&head);
+        int temp = code;
+        int count = 0;
+        while (temp > 0 || count < depth)
+        {
+            Stack_push(&head, temp % 2);
+            temp = temp >> 1;
+            count = count + 1;
+        }
+        while (head->next != NULL)
+        {
+            int data;
+            Stack_pop(&head, &data);
+            // printf("%d", data);
+        }
+
+        // printf(" -> %02X\n", huffmanTree->value);
+        Stack_destory(&head);
+    }
+    if (huffmanTree->left != NULL)
+    {
+        Huffman_leaf_print(huffmanTree->left, (code << 1), depth + 1);
+    }
+    if (huffmanTree->right != NULL)
+    {
+        Huffman_leaf_print(huffmanTree->right, (code << 1) + 1, depth + 1);
+    }
+}
+
+void HuffmanTree_destory(HuffmanTree **huffmanTree)
+{
+    if (*huffmanTree == NULL)
+    {
+        return;
+    }
+    if ((*huffmanTree)->left != NULL)
+    {
+        HuffmanTree_destory(&((*huffmanTree)->left));
+    }
+    if ((*huffmanTree)->right != NULL)
+    {
+        HuffmanTree_destory(&((*huffmanTree)->right));
+    }
+    //(*huffmanTree);
+}
+
+void DQT_print(DQT *dqt)
+{
+    // printf("----------------DQT START----------------\n");
+    // printf(" Marker: FF %X \n", dqt->marker);
+    // printf(" Length: %X\n", dqt->length);
+    for (int i = 0; i < dqt->length - 2; i = i + 1)
+    {
+        if (i == 0 || i == 65)
+        {
+            // printf("\n DQT Precision: %d\n", ((dqt->table[i] >> 4) & 0x0F) * 8 + 8);
+            // printf(" DQT Target: %s\n DQT TABLE:\n", (dqt->table[i] & 0x0F) == 0 ? "Y" : "C");
+        }
+        else
+        {
+            // printf(" %02X", (dqt->table[i]));
+            if ((i % 8 == 0 && (i < 65)) || ((i - 1) % 8 == 0 && (i >= 65)))
+            {
+                // printf("\n");
+            }
+        }
+    }
+    // printf("----------------DQT END------------------\n");
+}
+void DHT_print(DHT *dht, HuffmanTree **huffmanTree)
+{
+    // printf("----------------DHT START----------------\n");
+    // printf(" Marker: FF %X\n", dht->marker);
+    int p = 0;
+    int treeindex = 0;
+    while (p < dht->length - 2)
+    {
+        // printf("\n DHT CLASS: %s\n", (dht->table[p] >> 4) == 0 ? "DC" : "AC");
+        // printf(" DHT TARGET: %s\n", (dht->table[p] & 0x0F) == 0 ? "Y" : "C");
+        p = p + 1;
+        int sum = 0;
+        // printf(" DHT KEY Length List (16 BYTE):\n");
+        for (int i = 0; i < 16; i++)
+        {
+            // printf(" %02X", dht->table[p + i]);
+            sum = sum + dht->table[p + i];
+            if ((i + 1) % 8 == 0)
+            {
+                // printf("\n");
+            }
+        }
+        // printf(" DHT KEY TABLE\n");
+        p = p + 16;
+        for (int i = 1; i < sum + 1; i++)
+        {
+            // printf(" %02X", dht->table[p + i - 1]);
+            if (i % 16 == 0)
+            {
+                // printf("\n");
+            }
+        }
+        // printf("\n");
+        p = p + sum;
+        Huffman_leaf_print(huffmanTree[treeindex], 0, 0);
+        treeindex = treeindex + 1;
+    }
+    // printf("----------------DHT END------------------\n");
+}
+
+void APP0_print(APP0 *app0)
+{
+    // printf("----------------APP0 START----------------\n");
+    // printf(" Marker: %X\n", app0->marker);
+    // printf(" Length: %X\n", app0->length);
+    // printf(" Identifier: %s\n", app0->identifier);
+    // printf(" Version: %d.%d\n", ((app0->version) & 0xFF00) >> 8, (app0->version) & 0x00FF);
+    // printf(" Unit: %s\n", app0->unit == 0 ? "No unit" : app0->unit == 1 ? "DPI"
+                                                                        : "DPC");
+                                                                        // printf(" X Density: %d\n", app0->x_density);
+                                                                        // printf(" Y Density: %d\n", app0->y_density);
+                                                                        // printf(" X Thumbnail: %X\n", app0->x_thumbnail);
+                                                                        // printf(" Y Thumbnail: %X\n", app0->y_thumbnail);
+                                                                        // printf(" Thumbnail: \n");
+                                                                        for (int i = 0; i < app0->x_thumbnail * app0->y_thumbnail * 3; i++)
+                                                                        {
+                                                                            // printf(" %02X", app0->thumbnail[i]);
+                                                                            if ((i + 1) % 16 == 0)
+                                                                            {
+                                                                                // printf("\n");
+                                                                            }
+                                                                        }
+                                                                        // printf("\n----------------APP0 END------------------\n");
+}
+
+void SOF_print(SOF *sof)
+{
+    // printf("----------------SOF START----------------\n");
+    // printf(" Marker: FF %X\n", sof->marker);
+    // printf(" Length: %d\n", sof->length);
+    // printf(" Precision: %d\n", sof->precision);
+    // printf(" Height: %d\n", sof->height);
+    // printf(" Width: %d\n", sof->width);
+    // printf(" Components: %s\n", sof->components == 1 ? "Grayscale" : sof->components == 3 ? "YCrCb"
+                                                                                          : "YCrCbK");
+                                                                                          // printf(" Component Info: \n");
+                                                                                          for (int i = 0; i < sof->components; i++)
+                                                                                          {
+                                                                                              // printf("  Component ID: %d\n", sof->component_info[i * 3]);
+                                                                                              // printf("  Horizontal Sampling Factor: %d\n", sof->component_info[i * 3 + 1] >> 4);
+                                                                                              // printf("  Vertical Sampling Factor: %d\n", sof->component_info[i * 3 + 1] & 0x0F);
+                                                                                              // printf("  Quantization Table Selector: %d\n", sof->component_info[i * 3 + 2]);
+                                                                                          }
+                                                                                          // printf("----------------SOF END------------------\n");
+}
+
+void SOS_print(SOS *sos)
+{
+    // printf("----------------SOS START----------------\n");
+    // printf(" Marker: FF %X\n", sos->marker);
+    // printf(" Length: %d\n", sos->length);
+    // printf(" Components: %d\n", sos->components);
+    // printf(" Component Info: \n");
+    for (int i = 0; i < sos->components; i++)
+    {
+        // printf("  Component ID: %d\n", sos->component_info[i * 2]);
+        // printf("  DC Huffman Table Selector: %d\n", sos->component_info[i * 2 + 1] >> 4);
+        // printf("  AC Huffman Table Selector: %d\n", sos->component_info[i * 2 + 1] & 0x0F);
+    }
+    // printf(" Start Spectral Selection: %d\n", sos->start_spectral);
+    // printf(" End Spectral Selection: %d\n", sos->end_spectral);
+    /// printf(" Approximation High Bit: %d\n", sos->approx);
+    ////printf("----------------SOS END------------------\n");
+}
+
+void RST_print(unsigned char *buffer, int image_start, int fileSize)
+{
+    ////printf("----------------RST Start----------------\n");
+    for (int i = image_start; i < fileSize; i++)
+    {
+        int temp_code = buffer[i];
+        if (buffer[i] == 0xff)
+        {
+            if (buffer[i + 1] == MARKER_EOI)
+            {
+                break;
+            }
+            else if (buffer[i + 1] == 0xff)
+            {
+                continue;
+            }
+            else if (buffer[i + 1] == 0x00)
+            {
+                i = i + 1;
+            }
+            else if (buffer[i + 1] <= 0xd7 && buffer[i + 1] >= 0xd0)
+            {
+                ////printf(" %08X: RST%x\n", i, buffer[i + 1] & 0x0F);
+                i = i + 1;
+                continue;
+            }
+            else
+            {
+                continue;
+            }
+        }
+    }
+    ////printf("----------------RST END------------------\n");
+}
+
+void SEGS_print(HuffmanTree **huffmanTree, APP0 *app0, DQT *dqt, SOF *sof, DHT *dht, SOS *sos, unsigned char *buffer, int image_start, int fileSize)
+{
+    APP0_print(app0);
+    DQT_print(dqt);
+    DHT_print(dht, huffmanTree);
+    SOF_print(sof);
+    SOS_print(sos);
+    RST_print(buffer, image_start, fileSize);
+}
+
+void APP0_read(APP0 *app0, unsigned char *buffer, int start, int length)
+{
+    int offset = 0;
+    app0->marker = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + APP0_MARKER_LEN;
+    app0->length = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + APP0_LENGTH_LEN;
+    for (int i = 0; i < APP0_IDENTIFIER_LEN; i++)
+    {
+        app0->identifier[i] = buffer[start + offset + i];
+    }
+    offset = offset + APP0_IDENTIFIER_LEN;
+    app0->version = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + APP0_VERSION_LEN;
+    app0->unit = buffer[start + offset];
+    offset = offset + APP0_UNIT_LEN;
+    app0->x_density = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + APP0_X_DENSITY_LEN;
+    app0->y_density = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + APP0_Y_DENSITY_LEN;
+    app0->x_thumbnail = buffer[start + offset];
+    offset = offset + APP0_X_THUMBNAIL_LEN;
+    app0->y_thumbnail = buffer[start + offset];
+    offset = offset + APP0_Y_THUMBNAIL_LEN;
+    int thumbnail_size = app0->x_thumbnail * app0->y_thumbnail * 3;
+    for (int i = 0; i < thumbnail_size; i++)
+    {
+        app0->thumbnail[i] = buffer[start + offset + i];
+    }
+}
+
+void DQT_read(DQT *dqt, unsigned char *buffer, int start, int length)
+{
+    int offset = 0;
+    dqt->marker = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + DQT_MARKER_LEN;
+    dqt->length = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + DQT_LENGTH_LEN;
+    int table_size = length - offset + DQT_MARKER_LEN;
+    for (int i = 0; i < table_size; i++)
+    {
+        dqt->table[i] = buffer[start + offset + i];
+    }
+}
+
+void DHT_read(DHT *dht, unsigned char *buffer, int start, int length)
+{
+    int offset = 0;
+    dht->marker = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + DHT_MARKER_LEN;
+    dht->length = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + DHT_LENGTH_LEN;
+    int table_size = length - offset + DHT_MARKER_LEN;
+    for (int i = 0; i < table_size; i++)
+    {
+        dht->table[i] = buffer[start + offset + i];
+    }
+}
+
+void SOF_read(SOF *sof, unsigned char *buffer, int start, int length)
+{
+    int offset = 0;
+    sof->marker = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + SOF_MARKER_LEN;
+    sof->length = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + SOF_LENGTH_LEN;
+    sof->precision = buffer[start + offset];
+    offset = offset + SOF_PRECISION_LEN;
+    sof->height = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + SOF_HEIGHT_LEN;
+    sof->width = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + SOF_WIDTH_LEN;
+    sof->components = buffer[start + offset];
+    offset = offset + SOF_COMPONENTS_LEN;
+    int component_info_size = length - offset + SOF_MARKER_LEN;
+    for (int i = 0; i < component_info_size; i++)
+    {
+        sof->component_info[i] = buffer[start + offset + i];
+    }
+}
+void SOS_read(SOS *sos, unsigned char *buffer, int start, int length)
+{
+
+    int offset = 0;
+    sos->marker = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + SOS_MARKER_LEN;
+    sos->length = (buffer[start + offset] << 8) + (buffer[start + offset + 1]);
+    offset = offset + SOS_LENGTH_LEN;
+    sos->components = buffer[start + offset];
+    offset = offset + SOS_COMPONENTS_LEN;
+    int component_info_size = length - offset + SOS_MARKER_LEN - SOS_START_SPECTRAL_LEN - SOS_END_SPECTRAL_LEN - SOS_APPROX_LEN;
+    for (int i = 0; i < component_info_size; i++)
+    {
+        sos->component_info[i] = buffer[start + offset + i];
+    }
+    offset = offset + component_info_size;
+    sos->start_spectral = buffer[start + offset];
+    offset = offset + SOS_START_SPECTRAL_LEN;
+    sos->end_spectral = buffer[start + offset];
+    offset = offset + SOS_END_SPECTRAL_LEN;
+    sos->approx = buffer[start + offset];
+}
+
+void SEGS_read(unsigned char *buffer, int fileSize, APP0 **app0, DQT **dqt, SOF **sof, DHT **dht, SOS **sos, int *image_start)
+{
+    // for (int i = 0; i < fileSize; i++)
+    {
+        if (buffer[i] == 0xff)
+        {
+            if (buffer[i + 1] == MARKER_APP0)
+            {
+                if (*app0 == NULL)
+                {
+                    int length = ((short)buffer[i + 2] << 8) + ((short)buffer[i + 3]);
+                    *app0 = (APP0 *)(malloc(sizeof(APP0) + (unsigned long)(length - 16)));
+                    APP0_read(*app0, buffer, i, length);
+                }
+            }
+            else if (buffer[i + 1] == MARKER_DQT)
+            {
+                if (*dqt == NULL)
+                {
+                    int length = ((short)buffer[i + 2] << 8) + ((short)buffer[i + 3]);
+                    *dqt = (DQT *)(malloc(sizeof(DQT) + (unsigned long)(length - 2)));
+                    DQT_read(*dqt, buffer, i, length);
+                }
+            }
+            else if (buffer[i + 1] == MARKER_SOF0)
+            {
+                if (*sof == NULL)
+                {
+                    int length = ((short)buffer[i + 2] << 8) + ((short)buffer[i + 3]);
+                    *sof = (SOF *)(malloc(sizeof(SOF) + (unsigned long)(length - 8)));
+                    SOF_read(*sof, buffer, i, length);
+                }
+            }
+            else if (buffer[i + 1] == MARKER_DHT)
+            {
+                if (*dht == NULL)
+                {
+                    int length = ((short)buffer[i + 2] << 8) + ((short)buffer[i + 3]);
+                    *dht = (DHT *)(malloc(sizeof(DHT) + (unsigned long)(length - 2)));
+                    DHT_read(*dht, buffer, i, length);
+                }
+            }
+            else if (buffer[i + 1] == MARKER_SOS)
+            {
+                if (*sos == NULL)
+                {
+                    int length = ((short)buffer[i + 2] << 8) + ((short)buffer[i + 3]);
+                    *sos = (SOS *)(malloc(sizeof(SOS) + (unsigned long)(length - 6)));
+                    SOS_read(*sos, buffer, i, length);
+                    *image_start = i + 2 + length;
+                }
+            }
+            else if (buffer[i + 1] == MARKER_APPD)
+            {
+                int length = ((short)buffer[i + 2] << 8) + ((short)buffer[i + 3]);
+                i = i + 2;
+                i = i + length;
+            }
+        }
+    }
+}
+
+void Stack_init(Stack **stack)
+{
+    if (*stack == NULL)
+    {
+        //*stack = (Stack *)malloc(sizeof(Stack));
+        (*stack)->data = -1;
+        (*stack)->next = NULL;
+    }
+    else
+    {
+        // //printf("Stack already init\n");
+    }
+}
+
+void Stack_push(Stack **stack, int data)
+{
+    // Stack *node = (Stack *)malloc(sizeof(Stack));
+    node->data = data;
+    node->next = *stack;
+    *stack = node;
+}
+
+void Stack_pop(Stack **stack, int *data)
+{
+    if ((*stack)->next == NULL)
+    {
+        return;
+    }
+    Stack *node = *stack;
+    *stack = (*stack)->next;
+    *data = node->data;
+    ////(node);
+}
+
+void Stack_destory(Stack **stack)
+{
+    Stack *node = *stack;
+    while (node->next != NULL)
+    {
+        Stack *temp = node;
+        node = node->next;
+        ////(temp);
+    }
+    ////(node);
+}
+
+// 从指定文件（FILE_PLACE）中读取内容至缓冲区buffer
+bool file_read(unsigned char **buffer, int *fileSizeOut)
+{
+    // FILE *file = fopen(FILE_PLACE, "rb");
+    if (file == NULL)
+    {
+        ////printf("Failed to open file\n");
+        return false;
+    }
+    // fseek(file, 0, SEEK_END);    // 将文件位置指针移动到文件的末尾
+    // long fileSize = ftell(file); // 获取当前的文件位置，即文件的总大小
+    // fseek(file, 0, SEEK_SET);    // 将文件位置指针移动回文件的开始
+    *fileSizeOut = fileSize;
+    ////printf("File size: %ld bytes\n", fileSize);
+    //*buffer = (unsigned char *)malloc(sizeof(unsigned char) * fileSize);
+    // size_t bytesRead = fread(*buffer, 1, fileSize, file);
+    ////printf("Read %zu bytes\n", bytesRead);
+    // fclose(file);
+    return true;
+}
+
+int main()
+{
+    unsigned char *buffer = NULL;
+    int fileSize = 0;
+    int image_start = 0;
+    APP0 *app0 = NULL;
+    DQT *dqt = NULL;
+    DHT *dht = NULL;
+    SOF *sof = NULL;
+    SOS *sos = NULL;
+    HuffmanTree *huffmanTree[4];
+    for (int i = 0; i < 4; i++)
+    {
+        huffmanTree[i] = (HuffmanTree *)malloc(sizeof(HuffmanTree));
+    }
+    file_read(&buffer, &fileSize);
+    SEGS_read(buffer, fileSize, &app0, &dqt, &sof, &dht, &sos, &image_start);
+    HuffmanTree_init(huffmanTree, dht);
+    SEGS_print(huffmanTree, app0, dqt, sof, dht, sos, buffer, image_start, fileSize);
+    for (int i = 0; i < 4; i++)
+    {
+        HuffmanTree_destory(&huffmanTree[i]);
+    }
+    ////(buffer);
+    return 0;
+}
