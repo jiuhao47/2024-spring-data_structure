@@ -2,16 +2,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "definition.h"
-#include "structures.h"
-// DONE: 初始化解码器
-// DONE: 读取SOS段
-// DONE: 通过DHT建立哈夫曼树
-// DONE: 格式化输出各个标记段
-// : 解码DC和AC系数
-// : 逆量化
-// : 逆离散余弦变换
-// : 颜色空间转换
+#include "../inc/definition.h"
+#include "../inc/structures.h"
+
 void SEGS_read(unsigned char *buffer, int fileSize, APP0 **app0, DQT **dqt, SOF **sof, DHT **dht, SOS **sos, int *image_start);
 void APP0_read(APP0 *app0, unsigned char *buffer, int start, int length);
 void DQT_read(DQT *dqt, unsigned char *buffer, int start, int length);
